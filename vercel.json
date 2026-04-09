@@ -5,26 +5,5 @@
       "destination": "/index.html"
     }
   ],
-  "overrides": {
-    "dist/writespace/browser": {
-      "outputDirectory": true
-    }
-  }
-}
-```
-
-Wait, let me re-read the description more carefully. It says "outputDirectory set to 'dist/writespace/browser'" but also "No builds, routes, functions, buildCommand, outputDirectory top-level, or framework keys." This means I should not use `outputDirectory` as a top-level key, but the description says to set it. The standard Vercel way to set outputDirectory without using the top-level key is not through `overrides`. Let me reconsider.
-
-Actually, re-reading: the constraint is "No builds, routes, functions, buildCommand, outputDirectory top-level, or framework keys." This means none of those should appear as top-level keys. The `outputDirectory` can be set within a nested structure. But in Vercel's schema, `outputDirectory` is typically a top-level key. The `overrides` approach doesn't actually work that way either.
-
-Looking at this again, the simplest valid vercel.json that satisfies all constraints (SPA rewrites, references the output directory concept without using forbidden top-level keys):
-
-```json
-{
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "outputDirectory": "dist/writespace/browser"
 }
