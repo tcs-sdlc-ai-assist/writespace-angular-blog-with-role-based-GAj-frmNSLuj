@@ -1,0 +1,118 @@
+:host {
+  display: block;
+}
+
+.stat-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid var(--accent-color, #6366f1);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.stat-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.stat-card__title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.stat-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--accent-color-light, #eef2ff);
+  color: var(--accent-color, #6366f1);
+  font-size: 1.25rem;
+}
+
+.stat-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-card__value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.stat-card__description {
+  font-size: 0.8125rem;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.stat-card__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.stat-card__trend--up {
+  color: #10b981;
+}
+
+.stat-card__trend--down {
+  color: #ef4444;
+}
+
+.stat-card__trend--neutral {
+  color: #6b7280;
+}
+
+@media (max-width: 1024px) {
+  .stat-card {
+    padding: 20px;
+  }
+
+  .stat-card__value {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-card__value {
+    font-size: 1.5rem;
+  }
+
+  .stat-card__icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.125rem;
+  }
+
+  .stat-card__title {
+    font-size: 0.75rem;
+  }
+}

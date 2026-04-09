@@ -1,0 +1,118 @@
+<section class="hero">
+  <app-public-navbar></app-public-navbar>
+  <div class="hero-content">
+    <h1 class="hero-title">Your Space to Write, Share, and Inspire</h1>
+    <p class="hero-tagline">
+      WriteSpace is a modern blogging platform where your words find their audience.
+      Create beautiful posts, connect with readers, and grow your voice.
+    </p>
+    <div class="hero-cta">
+      <a routerLink="/register" class="btn btn-primary">Get Started</a>
+      <a routerLink="/blog" class="btn btn-secondary">Explore Posts</a>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-container">
+    <h2 class="section-title">Why WriteSpace?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">✍️</div>
+        <h3 class="feature-title">Effortless Writing</h3>
+        <p class="feature-description">
+          A clean, distraction-free editor that lets you focus on what matters most — your words.
+          Write, format, and publish with ease.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3 class="feature-title">Reach Your Audience</h3>
+        <p class="feature-description">
+          Share your stories with the world. Our platform helps your content get discovered
+          by readers who care about your topics.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Track Your Growth</h3>
+        <p class="feature-description">
+          Monitor your readership, engagement, and impact with built-in analytics.
+          Understand your audience and refine your craft.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="latest-posts">
+  <div class="latest-posts-container">
+    <h2 class="section-title">Latest Posts</h2>
+    @if (isLoading) {
+      <div class="posts-loading">
+        <p>Loading latest posts...</p>
+      </div>
+    } @else if (latestPosts.length === 0) {
+      <div class="posts-empty">
+        <p>No posts yet. Be the first to <a routerLink="/register">write something</a>!</p>
+      </div>
+    } @else {
+      <div class="posts-grid">
+        @for (post of latestPosts; track post.id) {
+          <div class="post-card">
+            @if (post.coverImage) {
+              <div class="post-card-image">
+                <img [src]="post.coverImage" [alt]="post.title" />
+              </div>
+            }
+            <div class="post-card-body">
+              <h3 class="post-card-title">
+                <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+              </h3>
+              <p class="post-card-excerpt">{{ post.excerpt }}</p>
+              <div class="post-card-meta">
+                <span class="post-card-author">{{ post.authorName }}</span>
+                <span class="post-card-date">{{ post.publishedAt | date: 'mediumDate' }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      <div class="posts-cta">
+        <a routerLink="/blog" class="btn btn-secondary">View All Posts</a>
+      </div>
+    }
+  </div>
+</section>
+
+<footer class="landing-footer">
+  <div class="footer-container">
+    <div class="footer-links">
+      <div class="footer-column">
+        <h4 class="footer-heading">WriteSpace</h4>
+        <ul>
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/blog">Blog</a></li>
+          <li><a routerLink="/about">About</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4 class="footer-heading">Account</h4>
+        <ul>
+          <li><a routerLink="/login">Sign In</a></li>
+          <li><a routerLink="/register">Sign Up</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4 class="footer-heading">Legal</h4>
+        <ul>
+          <li><a routerLink="/privacy">Privacy Policy</a></li>
+          <li><a routerLink="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; {{ currentYear }} WriteSpace. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

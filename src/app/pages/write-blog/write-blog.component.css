@@ -1,0 +1,251 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f4f6f9;
+  padding: 2rem 1rem;
+}
+
+.write-blog-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.write-blog-container h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #2c3e50;
+  background-color: #f9fafb;
+  border: 1.5px solid #dcdfe6;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+  background-color: #ffffff;
+}
+
+.form-group input[type="text"].invalid,
+.form-group textarea.invalid,
+.form-group select.invalid {
+  border-color: #e74c3c;
+}
+
+.form-group input[type="text"].invalid:focus,
+.form-group textarea.invalid:focus,
+.form-group select.invalid:focus {
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
+}
+
+.form-group textarea {
+  min-height: 220px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.char-counter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: #95a5a6;
+}
+
+.char-counter.warning {
+  color: #e67e22;
+}
+
+.char-counter.exceeded {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  min-height: 1.2em;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ecf0f1;
+}
+
+.btn {
+  padding: 0.7rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.btn-primary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+}
+
+.btn-secondary {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #dcdfe6;
+}
+
+.btn-secondary:focus-visible {
+  box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.15);
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #ffffff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.btn-danger:focus-visible {
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.4);
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+.loading-indicator .spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #ecf0f1;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 0.75rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem 0.5rem;
+  }
+
+  .form-card {
+    padding: 1.25rem;
+    border-radius: 8px;
+  }
+
+  .write-blog-container h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group textarea {
+    min-height: 160px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card {
+    padding: 1rem;
+  }
+
+  .form-group input[type="text"],
+  .form-group textarea,
+  .form-group select {
+    font-size: 0.9rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .form-group textarea {
+    min-height: 140px;
+  }
+
+  .btn {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.angular/
+.vscode/
+*.js.map
+.DS_Store
+Thumbs.db
+coverage/
+tmp/
+out-tsc/
+.sass-cache/
+*.tgz
+package-lock.json

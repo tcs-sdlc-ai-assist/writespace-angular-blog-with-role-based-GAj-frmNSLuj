@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/blogs" class="navbar-logo">WriteSpace</a>
+  </div>
+
+  <div class="navbar-links">
+    <a routerLink="/blogs" routerLinkActive="active" class="navbar-link">Blogs</a>
+    <a routerLink="/write" routerLinkActive="active" class="navbar-link">Write</a>
+    @if (isAdmin) {
+      <a routerLink="/admin" routerLinkActive="active" class="navbar-link">Admin</a>
+      <a routerLink="/users" routerLinkActive="active" class="navbar-link">Users</a>
+    }
+  </div>
+
+  <div class="navbar-actions">
+    <div class="navbar-avatar">
+      <span class="avatar-circle">{{ avatarInitial }}</span>
+      <span class="avatar-name">{{ displayName }}</span>
+    </div>
+    <button class="navbar-logout" (click)="onLogout()">Logout</button>
+  </div>
+</nav>

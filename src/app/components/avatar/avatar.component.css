@@ -1,0 +1,110 @@
+:host {
+  display: inline-block;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  font-style: normal;
+  line-height: 1;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Sizes */
+.avatar--sm {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+}
+
+.avatar--md {
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+}
+
+.avatar--lg {
+  width: 64px;
+  height: 64px;
+  font-size: 32px;
+}
+
+.avatar--xl {
+  width: 96px;
+  height: 96px;
+  font-size: 48px;
+}
+
+/* Role-based background colors */
+.avatar--admin {
+  background-color: #e8d5f5;
+  color: #6b21a8;
+}
+
+.avatar--editor {
+  background-color: #d5e8f5;
+  color: #1e40af;
+}
+
+.avatar--author {
+  background-color: #d5f5e8;
+  color: #166534;
+}
+
+.avatar--reader {
+  background-color: #f5e8d5;
+  color: #9a3412;
+}
+
+.avatar--default {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* Emoji display */
+.avatar__emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+  .avatar--lg {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  .avatar--xl {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar--md {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .avatar--lg {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .avatar--xl {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+}

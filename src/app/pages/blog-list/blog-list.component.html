@@ -1,0 +1,43 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/">WriteSpace</a>
+  </div>
+  <div class="navbar-links">
+    <a routerLink="/">Home</a>
+    <a routerLink="/write" class="btn-write">Write</a>
+  </div>
+</nav>
+
+<div class="blog-list-container">
+  <h1 class="page-title">Blog Posts</h1>
+
+  @if (loading) {
+    <div class="loading-state">
+      <p>Loading posts...</p>
+    </div>
+  }
+
+  @if (!loading && errorMessage) {
+    <div class="error-state">
+      <p>{{ errorMessage }}</p>
+    </div>
+  }
+
+  @if (!loading && !errorMessage && blogs.length > 0) {
+    <div class="blog-grid">
+      @for (blog of blogs; track blog.id) {
+        <app-blog-card
+          [blog]="blog"
+          [isOwner]="blog.authorId === currentUserId"
+        ></app-blog-card>
+      }
+    </div>
+  }
+
+  @if (!loading && !errorMessage && blogs.length === 0) {
+    <div class="empty-state">
+      <p class="empty-state-message">No blog posts yet. Be the first to share your thoughts!</p>
+      <a routerLink="/write" class="btn-cta">Start Writing</a>
+    </div>
+  }
+</div>

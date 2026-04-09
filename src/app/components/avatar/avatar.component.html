@@ -1,0 +1,16 @@
+<div
+  class="avatar"
+  [ngClass]="{
+    'avatar--admin': role === 'admin',
+    'avatar--user': role === 'user'
+  }"
+  [attr.aria-label]="'Avatar for ' + displayName"
+>
+  @if (role === 'admin') {
+    <span class="avatar__emoji">👑</span>
+  } @else if (role === 'user') {
+    <span class="avatar__emoji">📖</span>
+  } @else {
+    <span class="avatar__fallback">{{ displayName ? displayName.charAt(0).toUpperCase() : '?' }}</span>
+  }
+</div>

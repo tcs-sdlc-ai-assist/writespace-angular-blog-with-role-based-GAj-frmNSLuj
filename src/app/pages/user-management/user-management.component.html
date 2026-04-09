@@ -1,0 +1,148 @@
+<div class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/">WriteSpace</a>
+  </div>
+  <div class="navbar-links">
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/user-management" class="active">User Management</a>
+    <a routerLink="/login" (click)="logout()">Logout</a>
+  </div>
+</div>
+
+<div class="page-container">
+  <div class="page-header">
+    <h1>User Management</h1>
+    <p>Create and manage user accounts</p>
+  </div>
+
+  <div class="create-user-card">
+    <h2>Create New User</h2>
+
+    @if (successMessage) {
+      <div class="alert alert-success">
+        {{ successMessage }}
+      </div>
+    }
+
+    @if (errorMessage) {
+      <div class="alert alert-error">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="displayName">Display Name</label>
+        <input
+          id="displayName"
+          type="text"
+          formControlName="displayName"
+          placeholder="Enter display name"
+        />
+        @if (createUserForm.get('displayName')?.invalid && createUserForm.get('displayName')?.touched) {
+          <span class="form-error">Display name is required.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Enter username"
+        />
+        @if (createUserForm.get('username')?.invalid && createUserForm.get('username')?.touched) {
+          <span class="form-error">
+            @if (createUserForm.get('username')?.hasError('required')) {
+              Username is required.
+            } @else if (createUserForm.get('username')?.hasError('minlength')) {
+              Username must be at least 3 characters.
+            }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Enter password"
+        />
+        @if (createUserForm.get('password')?.invalid && createUserForm.get('password')?.touched) {
+          <span class="form-error">
+            @if (createUserForm.get('password')?.hasError('required')) {
+              Password is required.
+            } @else if (createUserForm.get('password')?.hasError('minlength')) {
+              Password must be at least 6 characters.
+            }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirm password"
+        />
+        @if (createUserForm.get('confirmPassword')?.touched && createUserForm.hasError('passwordMismatch')) {
+          <span class="form-error">Passwords do not match.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role" formControlName="role">
+          <option value="" disabled>Select a role</option>
+          <option value="admin">Admin</option>
+          <option value="editor">Editor</option>
+          <option value="author">Author</option>
+        </select>
+        @if (createUserForm.get('role')?.invalid && createUserForm.get('role')?.touched) {
+          <span class="form-error">Role is required.</span>
+        }
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="createUserForm.invalid || isSubmitting"
+      >
+        @if (isSubmitting) {
+          Creating...
+        } @else {
+          Create User
+        }
+      </button>
+    </form>
+  </div>
+
+  <div class="user-list-section">
+    <h2>Existing Users</h2>
+
+    @if (isLoadingUsers) {
+      <div class="loading-spinner">
+        <p>Loading users...</p>
+      </div>
+    } @else if (users.length === 0) {
+      <div class="empty-state">
+        <p>No users found.</p>
+      </div>
+    } @else {
+      <div class="user-list">
+        @for (user of users; track user.id) {
+          <app-user-row
+            [user]="user"
+            (delete)="onDeleteUser($event)"
+            (edit)="onEditUser($event)"
+          ></app-user-row>
+        }
+      </div>
+    }
+  </div>
+</div>

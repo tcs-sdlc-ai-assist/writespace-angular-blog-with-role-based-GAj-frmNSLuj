@@ -1,0 +1,51 @@
+<div class="user-row" [class.user-row--disabled]="isDeleteDisabled">
+  <div class="user-row__avatar">
+    @if (user.avatarUrl) {
+      <img
+        [src]="user.avatarUrl"
+        [alt]="user.firstName + ' ' + user.lastName + ' avatar'"
+        class="user-row__avatar-img"
+      />
+    } @else {
+      <div class="user-row__avatar-placeholder">
+        {{ user.firstName?.charAt(0)?.toUpperCase() }}{{ user.lastName?.charAt(0)?.toUpperCase() }}
+      </div>
+    }
+  </div>
+
+  <div class="user-row__details">
+    <span class="user-row__name">{{ user.firstName }} {{ user.lastName }}</span>
+    <span class="user-row__email">{{ user.email }}</span>
+  </div>
+
+  <div class="user-row__role">
+    <span
+      class="user-row__role-badge"
+      [class.user-row__role-badge--admin]="user.role === 'admin'"
+      [class.user-row__role-badge--editor]="user.role === 'editor'"
+      [class.user-row__role-badge--viewer]="user.role === 'viewer'"
+    >
+      {{ user.role | titlecase }}
+    </span>
+  </div>
+
+  <div class="user-row__created">
+    <span class="user-row__created-label">Created</span>
+    <span class="user-row__created-date">{{ user.createdAt | date: 'mediumDate' }}</span>
+  </div>
+
+  @if (showDeleteButton) {
+    <div class="user-row__actions">
+      <button
+        class="user-row__delete-btn"
+        type="button"
+        [disabled]="isDeleteDisabled"
+        [attr.title]="isDeleteDisabled ? deleteDisabledTooltip : 'Delete user'"
+        (click)="onDelete()"
+      >
+        <span class="user-row__delete-icon" aria-hidden="true">✕</span>
+        <span class="user-row__delete-text">Delete</span>
+      </button>
+    </div>
+  }
+</div>

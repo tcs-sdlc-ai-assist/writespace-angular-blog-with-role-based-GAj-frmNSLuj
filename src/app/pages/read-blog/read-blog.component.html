@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<main class="read-blog-container">
+  @if (loading) {
+    <div class="loading-state">
+      <p>Loading article...</p>
+    </div>
+  }
+
+  @if (error && !loading) {
+    <div class="error-state">
+      <h2>Post Not Found</h2>
+      <p>The article you're looking for doesn't exist or has been removed.</p>
+      <button class="back-button" (click)="goBack()">
+        ← Back to Blog
+      </button>
+    </div>
+  }
+
+  @if (post && !loading && !error) {
+    <article class="blog-article">
+      <header class="article-header">
+        <h1 class="article-title">{{ post.title }}</h1>
+        <div class="author-line">
+          <img
+            class="author-avatar"
+            [src]="post.author?.avatar || 'assets/default-avatar.png'"
+            [alt]="post.author?.name || 'Author'"
+          />
+          <div class="author-details">
+            <span class="author-name">{{ post.author?.name || 'Anonymous' }}</span>
+            <span class="article-date">{{ post.createdAt | date: 'longDate' }}</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="article-body" [innerHTML]="sanitizedContent"></div>
+
+      <footer class="article-footer">
+        <button class="back-button" (click)="goBack()">
+          ← Back to Blog
+        </button>
+      </footer>
+    </article>
+  }
+</main>

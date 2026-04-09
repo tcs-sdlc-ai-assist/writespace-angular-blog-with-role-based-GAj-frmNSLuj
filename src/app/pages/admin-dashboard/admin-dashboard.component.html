@@ -1,0 +1,119 @@
+<div class="admin-dashboard">
+  <!-- Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Gradient Banner -->
+  <section class="banner">
+    <div class="banner-content">
+      <h1>Welcome back, Admin</h1>
+      <p>Manage your blog posts, users, and site content from one place.</p>
+    </div>
+  </section>
+
+  <!-- Stat Cards Grid -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ totalPosts }}</h3>
+          <p>Total Posts</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ totalUsers }}</h3>
+          <p>Total Users</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-comments"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ totalComments }}</h3>
+          <p>Total Comments</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <div class="stat-info">
+          <h3>{{ totalViews }}</h3>
+          <p>Total Views</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Action Buttons -->
+  <section class="quick-actions-section">
+    <h2>Quick Actions</h2>
+    <div class="quick-actions-row">
+      <button class="action-btn primary" routerLink="/admin/posts/new">
+        <i class="fas fa-plus"></i>
+        New Post
+      </button>
+      <button class="action-btn secondary" routerLink="/admin/users">
+        <i class="fas fa-user-cog"></i>
+        Manage Users
+      </button>
+      <button class="action-btn secondary" routerLink="/admin/categories">
+        <i class="fas fa-tags"></i>
+        Manage Categories
+      </button>
+      <button class="action-btn secondary" routerLink="/admin/settings">
+        <i class="fas fa-cog"></i>
+        Site Settings
+      </button>
+    </div>
+  </section>
+
+  <!-- Recent Posts Section -->
+  <section class="recent-posts-section">
+    <div class="section-header">
+      <h2>Recent Posts</h2>
+      <a routerLink="/admin/posts" class="view-all-link">View All Posts</a>
+    </div>
+
+    @if (isLoading) {
+      <div class="loading-spinner">
+        <p>Loading recent posts...</p>
+      </div>
+    }
+
+    @if (errorMessage) {
+      <div class="error-message">
+        <p>{{ errorMessage }}</p>
+        <button class="action-btn primary" (click)="loadRecentPosts()">Retry</button>
+      </div>
+    }
+
+    @if (!isLoading && !errorMessage && recentPosts.length === 0) {
+      <div class="empty-state">
+        <p>No posts yet. Create your first post!</p>
+        <button class="action-btn primary" routerLink="/admin/posts/new">
+          <i class="fas fa-plus"></i>
+          Create Post
+        </button>
+      </div>
+    }
+
+    @if (!isLoading && !errorMessage && recentPosts.length > 0) {
+      <div class="posts-grid">
+        @for (post of recentPosts; track post.id) {
+          <app-blog-card [post]="post"></app-blog-card>
+        }
+      </div>
+    }
+  </section>
+</div>

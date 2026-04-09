@@ -1,0 +1,97 @@
+<div class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/">WriteSpace</a>
+  </div>
+  <div class="navbar-links">
+    <a routerLink="/blogs" class="nav-link">My Blogs</a>
+    <a routerLink="/" class="nav-link">Home</a>
+  </div>
+</div>
+
+<div class="write-blog-container">
+  <div class="form-card">
+    <h2 class="form-title">{{ isEditMode ? 'Update Blog Post' : 'Create Blog Post' }}</h2>
+
+    <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title" class="form-label">Title</label>
+        <input
+          id="title"
+          type="text"
+          class="form-control"
+          formControlName="title"
+          placeholder="Enter your blog title"
+        />
+        @if (blogForm.get('title')?.invalid && blogForm.get('title')?.touched) {
+          <div class="validation-errors">
+            @if (blogForm.get('title')?.errors?.['required']) {
+              <span class="error-message">Title is required.</span>
+            }
+            @if (blogForm.get('title')?.errors?.['minlength']) {
+              <span class="error-message">Title must be at least 3 characters long.</span>
+            }
+            @if (blogForm.get('title')?.errors?.['maxlength']) {
+              <span class="error-message">Title cannot exceed 100 characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="content" class="form-label">Content</label>
+        <textarea
+          id="content"
+          class="form-control content-textarea"
+          formControlName="content"
+          placeholder="Write your blog content here..."
+          rows="12"
+        ></textarea>
+        <div class="character-counter" [class.limit-warning]="contentCharCount > maxContentLength * 0.9" [class.limit-exceeded]="contentCharCount > maxContentLength">
+          {{ contentCharCount }} / {{ maxContentLength }} characters
+        </div>
+        @if (blogForm.get('content')?.invalid && blogForm.get('content')?.touched) {
+          <div class="validation-errors">
+            @if (blogForm.get('content')?.errors?.['required']) {
+              <span class="error-message">Content is required.</span>
+            }
+            @if (blogForm.get('content')?.errors?.['minlength']) {
+              <span class="error-message">Content must be at least 10 characters long.</span>
+            }
+            @if (blogForm.get('content')?.errors?.['maxlength']) {
+              <span class="error-message">Content cannot exceed {{ maxContentLength }} characters.</span>
+            }
+          </div>
+        }
+      </div>
+
+      @if (errorMessage) {
+        <div class="form-error">
+          <span class="error-message">{{ errorMessage }}</span>
+        </div>
+      }
+
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="blogForm.invalid || isSubmitting"
+        >
+          @if (isSubmitting) {
+            <span class="spinner"></span>
+            {{ isEditMode ? 'Updating...' : 'Creating...' }}
+          } @else {
+            {{ isEditMode ? 'Update' : 'Create' }}
+          }
+        </button>
+        <button
+          type="button"
+          class="btn btn-cancel"
+          (click)="onCancel()"
+          [disabled]="isSubmitting"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
